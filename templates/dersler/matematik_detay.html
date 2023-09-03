@@ -1,0 +1,204 @@
+
+{% extends "home/layout.html" %}
+
+{% block body %}
+
+<style>
+
+
+@media (min-width: 576px) {
+  /* Small devices (sm) and up */
+  .video {
+    width: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+  /* Large devices (lg) and up */
+  .video {
+    width: 650px;
+    height: 450px;
+  }
+}
+
+
+.yorum-container{
+  padding: 20px;
+  margin-bottom: 55px; 
+  height: auto;
+}
+.buton{
+  border: none;
+  border-radius: 50px;
+  padding: 10px;
+}
+.yorum-formu input[type="text"],
+.yorum-formu textarea {
+  width: 100%;
+  
+   border: 1px solid #ccc;
+  border-radius: 5px;
+  height: 200px;
+}
+
+
+.yorum-listesi {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.yorum {
+  padding: 12px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.yorum span.tarih {
+  float: right;
+  font-size: 10px;
+  align-items: center;
+}
+
+.yorum span.kullanici {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.buton {
+  border: none;
+  margin-top: 20px;
+  ;
+  color: black;
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.buton:hover {
+  background-color: rgba(128, 128, 128, 0.399);
+}
+
+</style>
+{% if user.is_authenticated %}
+<div class="container video-container mt-3 ">
+  <div class="row">
+    <!-- Video ve Açıklama -->
+    <div class="col-md-6">
+      <h3 class="my-3">{{ ders.title }}</h3>
+      <div class="embed-responsive embed-responsive-16by9 video">
+        <iframe class="embed-responsive-item video" src="https://www.youtube.com/embed/{{ ders.video_id }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+      <p>{{ ders.description }}</p>
+      {% if 'begeni_'|add:ders.video_id|stringformat:"d" in request.session %}
+      <button class="beğeni_butonu" disabled>Beğenildi</button>
+      {% else %}
+      <div class="d-flex justify-content-between">
+        <button class="beğeni_butonu buton btn" onclick="begen(this)" data-video-id="{{ ders.video_id }}" data-sayı="{{ ders.begeni_sayisi }}">Beğen:<i class="ms-2 fas fa-thumbs-up like-icon"></i></button>
+        <p class="begeni_sayisi me-lg-5 pe-lg-5">Beğeni Sayısı: {{ ders.begeni_sayisi }}</p>
+      </div>
+      {% endif %}
+    </div>
+    <!-- Yorumlar -->
+    <div class="col-md-6 container ">
+      <div class="yorumlar mt-4 ">
+        <h3>Yorumlar</h3>
+        <div class="yorum-listesi" style="max-height: 450px; overflow-y: scroll;">
+          <ul>
+            {% for yorum in yorumlar %}
+            {% if forloop.counter <= 5 %}
+            <li class="yorum">{{ yorum.kullanici.username }} - {{ yorum.icerik }} <span class="tarih">{{ yorum.tarih }}</span></li>
+            {% endif %}
+            {% endfor %}
+          </ul>
+          {% if yorumlar.count > 5 %}
+          <div class="tum-yorumlar" style="display: none;">
+            {% for yorum in yorumlar %}
+            {% if forloop.counter > 5 %}
+            <li class="yorum yorum-ortala">{{ yorum.kullanici.username }} - {{ yorum.icerik }} <span class="tarih">{{ yorum.tarih }}</span></li>
+            {% endif %}
+            {% endfor %}
+          </div>
+          <button class="buton" onclick="goster()">Tümünü Gör</button>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Yorum Formu -->
+<div class="yorum-formu container my-3">
+  <h4>Yorum Yap</h4>
+  <form method="post" class="yorum-formu">
+    {% csrf_token %}
+    {{ yorum_form.as_p }}
+    <input class="buton" type="submit" name="yorum_yap" value="Yorum Yap">
+  </form>
+</div>
+{% else %}
+<script>
+  alert("Bu sayfaya erişebilmek için önce giriş yapmalısınız.");
+</script>
+{% endif %}
+
+  
+    
+    <script>
+        var gosterilenYorumSayisi = 5;
+var tumYorumlarGoruldu = false;
+
+function goster() {
+  if (!tumYorumlarGoruldu) {
+    var yorumListesi = document.querySelector('.yorum-listesi ul');
+    var tumYorumlar = document.querySelector('.tum-yorumlar');
+    tumYorumlar.style.display = 'block';
+    yorumListesi.style.display = 'none';
+    gosterilenYorumSayisi = {{ yorumlar.count }};
+    tumYorumlarGoruldu = true;
+  }
+  else {
+    var yorumListesi = document.querySelector('.yorum-listesi ul');
+    var tumYorumlar = document.querySelector('.tum-yorumlar');
+    tumYorumlar.style.display = 'none';
+    yorumListesi.style.display = 'block';
+    gosterilenYorumSayisi = 5;
+    tumYorumlarGoruldu = false;
+  }
+}
+
+
+    function begen(button) {
+        // Beğeni sayısını artır ve güncellemeyi sayfa üzerinde yap
+        var beğeni_sayısı = parseInt(button.dataset.sayı) + 1;
+        button.dataset.sayı = beğeni_sayısı;
+        button.innerText = 'Beğenildi';
+        button.disabled = true;
+
+        // Beğeni sayısını güncelle
+        var beğeni_sayısı_element = button.nextElementSibling;
+        beğeni_sayısı_element.innerText = 'Beğeni Sayısı: ' + beğeni_sayısı;
+
+        // Beğeni durumunu tarayıcı yerine veritabanında sakla
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '', true);
+        xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send('begeni_artir=true');
+        
+        // AJAX ile beğeni sayısını sunucudan güncelle
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.begeni_sayisi) {
+                    // Sunucudan gelen beğeni sayısını ekrana yaz
+                    beğeni_sayısı_element.innerText = 'Beğeni Sayısı: ' + response.begeni_sayisi;
+                }
+            }
+        };
+    }
+</script>
+{% endblock body %}

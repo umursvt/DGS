@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{% static 'css/sidebar.css' %}">
+
+</head>
+<body>
+
+<div id="mySidenav" class="sidenav ">
+  <a class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle  " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Dgs 
+    </a>
+    <ul class="dropdown-menu bg-dark  pe-4   ">
+      <li><a class="dropdown-item item" href="{% url 'dersler:temel_mantik' %}">Temel Mantık</a></li>
+      <li><a class="dropdown-item item" href="{% url 'dersler:matematik' %}">Matematik</a></li>
+      <li><a class="dropdown-item item" href="{% url 'dersler:geometri' %}">Geometri</a></li>
+    </ul>
+    </a>
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="{% url 'dersler:hakkimizda' %}">Hakkımızda</a>
+ 
+  
+  
+  <a href="{% url 'dersler:iletisim' %}">İletişim</a>
+</div>
+
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+</script>
+   
+</body>
+</html> 

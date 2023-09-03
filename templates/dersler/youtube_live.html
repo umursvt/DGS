@@ -1,0 +1,33 @@
+{% extends 'home/layout.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Live Videos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4 text-center item-center  mb-4 pb-4 ">
+        <h1 class="my-4 text-center mb-4  ">Canlı Yayınlar</h1>
+        <div class="d-flex justify-content-center"> 
+            <div class="row">
+                {% for live_video in live_videos %}
+                <div>
+                    <div class="card ms-auto shadow">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ live_video.snippet.title }}</h5>
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{ live_video.id.videoId }}" allowfullscreen></iframe>
+                            </div>
+                            <p class="card-text">{{ live_video.snippet.description }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+</html>
+{% endblock body %}

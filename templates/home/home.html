@@ -1,0 +1,120 @@
+
+{% extends 'home/layout.html' %}
+{% load static %}
+
+{% block body %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css">
+
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+<body>
+     <!-- Büyük fotoğraflar -->
+     <div class="photo-container  mt-3 ">
+      <img class="photo" src="{% static 'img/1.jpg' %}" alt="Foto 1">
+      <img class="photo" src="{% static 'img/2.jpg' %}" alt="Foto 2">
+      <img class="photo" src="{% static 'img/3.jpg' %}" alt="Foto 3">
+      <img class="photo" src="{% static 'img/4.jpg' %}" alt="Foto 4">
+  </div>
+  <div class="container">
+
+    <!-- Sol div -->
+    <div class="left">
+        <h1>Matematik ve Geometri Dünyasına Hoş Geldiniz!</h1>
+        <p>
+            Merhaba, matematik ve geometriyle dolu bir dünyaya adım atmak üzeresiniz. Bu platformda matematik öğreniminin keyfini çıkarırken, hayatınız boyunca size eşlik edecek temel bilgi ve becerileri edineceksiniz. 
+        </p>
+        <p>
+            Matematik, evrendeki düzeni anlama arayışımızın temel taşıdır. Sayılar, geometrik şekiller, denklemler ve ispatlarla dolu bu harika bilim dalı, bilgi ve keşfetme yolculuğunuzu eşsiz kılar.
+        </p>
+        <p>
+            İster matematiğin temellerini atmak, ister zorlu problemleri çözmek için buradasınız. Hedefimiz, matematikle ilgili öğrenim sürecinizi zevkli ve etkili hale getirmek, sıkıcı gibi görünen konuları sade ve anlaşılır bir şekilde size sunmaktır.
+        </p>
+    </div>
+
+    <!-- Sağ div -->
+    <div class="right">
+        <!-- Duyuru -->
+        <div class="announcement">
+            <h2>MAT2023: İleri Matematik Eğitim Seti Yayınlandı!</h2>
+            <p>
+                Sitemizdeki yeni matematik eğitim setimiz olan MAT2023 artık satışta! Bu set ile matematik bilginizi daha da ileriye taşıyacak ve zorlu konuları kolayca çözebileceksiniz. Hemen incelemek için tıklayın ve eşsiz indirimlerden yararlanın!
+            </p>
+            <a href="{% url 'dersler:matematik' %}" class="btn btn-warning ">SATIN AL</a>
+        </div>
+
+        <!-- Diğer içerikler -->
+        <div>
+            <h2>Matematik Öğrenimi</h2>
+            <p>
+                Matematik öğrenimi, analitik düşünme ve problem çözme becerilerini geliştiren bir yolculuktur. Sitemizde, matematik kavramlarını temelden ileri seviyeye kadar adım adım öğrenecek, pratik problemler çözecek ve matematikle ilgili merak ettiğiniz her şeyi keşfedeceksiniz.
+            </p>
+        </div>
+        <div>
+            <h2>Geometri</h2>
+            <p>
+                Geometri, şekillerin ve uzayın incelendiği matematik dalıdır. Eğlenceli ve görsel bir şekilde geometri dünyasına giriş yapacak, üçgenler, dörtgenler, daireler gibi temel şekilleri keşfedecek ve analitik geometriyle gerçek hayatta nasıl kullanıldığını göreceksiniz.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+
+ <!-- Tiny slider -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/min/tiny-slider.js"></script>
+ <div class="tiny-slider">
+  <div class="tiny-slide">
+    <img class="photo" src="{% static 'img/6.jpg' %}" alt="Foto 4">
+  </div>
+  <div class="tiny-slide">
+    <img class="photo" src="{% static 'img/7.jpg' %}" alt="Foto 4">
+  </div>
+  <div class="tiny-slide">
+    <img class="photo" src="{% static 'img/4.jpg' %}" alt="Foto 4">
+  </div>
+  <div class="tiny-slide">
+    <img class="photo" src="{% static 'img/3.jpg' %}" alt="Foto 4">
+  </div>
+  <div class="tiny-slide">
+    <img class="photo" src="{% static 'img/4.jpg' %}" alt="Foto 4">
+  </div>
+  <div class="tiny-slide">
+    <img class="photo" src="{% static 'img/4.jpg' %}" alt="Foto 4">
+  </div>
+  <div class="tiny-slide">
+    <img class="photo" src="{% static 'img/5.jpg' %}" alt="Foto 4">
+  </div>
+  <div class="tiny-slide">
+    <img class="photo" src="{% static 'img/2.jpg' %}" alt="Foto 4">
+  </div>
+  <div class="tiny-slide">
+    <img class="photo" src="{% static 'img/4.jpg' %}" alt="Foto 4">
+  </div>
+  <div class="tiny-slide">
+    <img class="photo" src="{% static 'img/1.jpg' %}" alt="Foto 4">
+  </div>
+  <div class="tiny-slide">
+    <img class="photo" src="{% static 'img/2.jpg' %}" alt="Foto 4">
+  </div>
+  
+
+  <!-- Slider için diğer fotoğrafları buraya ekleyin -->
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/min/tiny-slider.js"></script>
+    <script>
+        var slider = tns({
+            container: '.tiny-slider',
+            items: 5,
+            slideBy: 'page',
+            autoplay: true,
+            controls: true,
+            nav: false,
+            autoplayButtonOutput: false
+        });
+    </script>
+    <!-- Include Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock body %}

@@ -1,0 +1,65 @@
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif, Times, serif, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+   
+}
+
+/* Container için stil */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* Sol ve sağ divler için stil */
+.left, .right {
+    width: 45%;
+    margin: 10px;
+}
+
+/* Büyük fotoğrafların stilini ayarlayın */
+.photo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.photo {
+    width: 38.2%;
+    margin: 10px;
+}
+
+/* Tiny slider stilini ayarlayın */
+ /* Slider container */
+ .tiny-slider {
+    background-color: #f0f0f0; /* Gri arka plan */
+    padding: 10px;
+    border: none; /* Border kaldır */
+    display: flex;
+    justify-content: center; /* Tam ortasında olacak şekilde düzenle */
+    align-items: center;
+    
+}
+
+/* Butonlar */
+.tns-controls {
+    display: flex;
+    justify-content: space-between; /* Butonları sağ ve sol kenara yerleştir */
+    align-items: center;
+    padding: 5px;
+    align-items: center;
+    top: 0;
+    border: none;
+}
+
+/* Slider içerisindeki fotoğrafların stilini ayarla */
+.tiny-slide img {
+    width: 300px; /* Fotoğrafları daha büyük yap */
+    height: 200px;
+    object-fit: cover; /* Fotoğrafların boyutlarını koruyarak sığdır */
+    padding: 10px;
+}

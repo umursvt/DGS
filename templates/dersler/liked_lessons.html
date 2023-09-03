@@ -1,0 +1,28 @@
+{% extends "home/layout.html" %}
+{% block title %}
+    Beğenilen Videolar
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1 class="mb-4">Beğenilen Videolar</h1>
+        <div class="row">
+            {% for video in liked_videos %}
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card ms-auto shadow ">
+                        <div class="embed-responsive embed-responsive-16by9 item-center text-center mt-4 ">
+                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{ video.ders.video_id }}" allowfullscreen></iframe>
+                        </div>
+                        <div class="card-body item-center text-center ">
+                            <h5 class="card-title">{{ video.ders.title }}</h5>
+                            <p class="card-text">{{ video.ders.description }}</p>
+                            <p class="card-text">Beğeni Sayısı: {{ video.ders.begeni_sayisi }}</p>
+                           
+                        </div>
+                    </div>
+                    
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock body %}

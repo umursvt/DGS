@@ -1,0 +1,66 @@
+{% load static %}<!-- Navbar -->
+<nav class="navbar navbar-expand-lg  mt-3">
+  <div class="container-fluid container ">
+      <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; </span>
+
+      <!-- Navbar markası -->
+      <a class="navbar-brand" href="{% url 'home' %}">DGS Sitesi</a>
+
+      <!-- Toggle menüsü -->
+      <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Navbar menüleri -->
+      <div class="collapse navbar-collapse ms-lg-5 ps-lg-5" id="navbarSupportedContent">
+          <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
+              <li class="nav-item"><a class="nav-link btn btn-danger bg-danger text-white  me-lg-4 " href="{% url 'dersler:youtube-live' %}">Canlı Ders</a></li>
+              <form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'dersler:dersler_search' %}">
+                <input class="form-control mr-sm-2" type="search" placeholder="Ders ara..." aria-label="Search" name="q">
+             
+            </form>
+              <!-- Diğer menü öğeleri ... -->
+          </ul>
+
+          {% if user.is_authenticated %}
+          <ul class="navbar-nav mb-2 mb-lg-0">
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'dersler:begenilen_videolar'  %}"><img class="icon" src="{% static 'icons/bookmark.png' %}" alt="User 30 Icon"></a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#"><img class="icon" src="{% static 'icons/mail.png' %}" alt="User 30 Icon"></a>
+              </li>
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img class="icon" src="{% static 'icons/user30.png' %}" alt="User 30 Icon"></a>
+                  <ul class="dropdown-menu drop">
+                      <li><a class="dropdown-item" href="{% url 'uyelik:profil' %}">Profil Ayarları</a></li>
+                      <li><a class="dropdown-item" href="{% url 'uyelik:logout' %}">Çıkış Yap</a></li>
+                      <li><a class="dropdown-item" href="#">Yardım</a></li>
+                  </ul>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">
+                      <p class="text-danger">{{ user }}</p>
+                  </a>
+              </li>
+          </ul>
+          {% else %}
+          <ul class="navbar-nav mb-2 mb-lg-0">
+              <li class="nav-item">
+          
+                  <a class="nav-link" href="{% url 'dersler:begenilen_videolar' %}"><img class="icon" src="{% static 'icons/bookmark.png' %}" alt="User 30 Icon"></a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#"><img class="icon" src="{% static 'icons/mail.png' %}" alt="User 30 Icon"></a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="{% url 'uyelik:login' %}">Giriş Yap</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="{% url 'uyelik:register' %}">Kayıt Ol</a>
+              </li>
+          </ul>
+          {% endif %}
+      </div>
+  </div>
+</nav>
